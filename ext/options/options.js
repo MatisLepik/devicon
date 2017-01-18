@@ -5,4 +5,4 @@ console.log('options log!');
 
 },{}]},{},[1])
 
-//# sourceMappingURL=main.js.map
+//# sourceMappingURL=options.js.map

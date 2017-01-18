@@ -11,9 +11,9 @@
     "128": "icons/icon128.png"
   },
   "default_locale": "en",
-  "options_page": "src/options/index.html",
+  "options_page": "options/index.html",
   "background": {
-    "scripts": ["src/bg.js"]
+    "scripts": ["js/bg.js"]
   },
   "page_action": {
     "default_icon": {
@@ -33,7 +33,7 @@
         "<all_urls>"
       ],
       "js": [
-        "src/main.js"
+        "js/content.js"
       ]
     }
   ]

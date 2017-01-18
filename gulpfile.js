@@ -18,18 +18,20 @@ const paths = {
   style: {
     src: 'src/scss/style.scss',
     watch: 'src/scss/**/*.scss',
-    dest: `${publicPath}/src/options`
+    dest: `${publicPath}/options`
   },
   scripts: [
     {
-      src: 'src/scripts/main.js',
+      src: 'src/scripts/content.js',
+      outputName: 'content.js',
       watch: 'src/scripts/**/*.js',
-      dest: `${publicPath}/src`
+      dest: `${publicPath}/js`
     },
     {
-      src: 'src/optionsScripts/main.js',
+      src: 'src/optionsScripts/options.js',
+      outputName: 'options.js',
       watch: 'src/optionsScripts/**/*.js',
-      dest: `${publicPath}/src/options`
+      dest: `${publicPath}/options`
     }
   ]
 };
@@ -56,7 +58,7 @@ gulp.task('serve', () => { // Watch for changes and browsersync
 
   browserSync.init({
     server: {
-      baseDir: `${publicPath}/src/options`
+      baseDir: `${publicPath}/options`
     },
     port: 8787,
     notify: false
@@ -84,7 +86,7 @@ gulp.task('scripts', () => {
         gutil.log(err);
         this.emit('end');
       })
-      .pipe(source('main.js'))
+      .pipe(source(script.outputName))
       .pipe(buffer())
       .pipe(sourcemaps.init({
         loadMaps: true
