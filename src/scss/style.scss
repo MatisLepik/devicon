@@ -1,0 +1,50 @@
+/**
+ * VENDOR
+ */
+@import "node_modules/normalize.css/normalize";
+
+/**
+ * CONFIG
+ * Variables and other such configuration goes here.
+ */
+@import "config";
+
+/**
+ * CORE
+ */
+
+@import "node_modules/@optimistdigital/core-scss/core";
+
+/**
+ * MODIFIERS
+ *
+ * These are utility classes that you can attach to other elements to alter their behaviour. They shouldn't have any
+ * big styles on their own, only provide some behaviour that is frequently used in the app. For example:
+ * floats, grids, mixins
+ */
+@import "modifiers/before-icon"; // For adding an icon before an element (inline-block)
+@import "modifiers/visually-hidden"; // For hiding text that's only meant to be read by screen readers
+
+/**
+ * COMPONENTS
+ *
+ * These should make up most of the UI for the website. Every self contained part of the website should be its own component.
+ * Try following these rules to make sure that things don't get out of hand:
+ *
+ * 1) Components can contain other components
+ * 2) A component should only be in charge of its visual style, not where it's positioned
+ * 3) A component should never change the visual style of other components
+ * 4) A component should be positioned by other, more general components (or by views)
+ * 5) If a component looks different based on its location, don't restyle the component in those locations.
+ *    Instead, you should apply modifiers inside of its own component (for example, .element.dark { background-color: black })
+ */
+@import "components/forms/input-field-text"; // Float label interactivity is in @optimistdigital/core-js/floatLabel.js
+@import "components/forms/form"; // Basic form styling (such as whitespace between input groups)
+
+/**
+ * VIEWS
+ *
+ * Very general styles (special background-color for a view, positioning for the highest level components) belong here.
+ * Try to keep view styles to a minimum (most styles should belong to components)
+ */
+// @import "views/";

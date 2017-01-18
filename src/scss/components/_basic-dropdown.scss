@@ -1,0 +1,19 @@
+.basic-dropdown {
+    position: relative;
+    display: inline-block;
+
+    [data-dropdown] {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%, 20px);
+        z-index: 10000;
+        transition: opacity 150ms, visibility 150ms;
+        background-color: $color-bg;
+    }
+
+    &[data-dropdown-open="false"] [data-dropdown] {
+        opacity: 0;
+        visibility: hidden;
+    }
+}

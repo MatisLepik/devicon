@@ -77,7 +77,6 @@ function combineImages(_images) {
     images.forEach(img => img && ctx.drawImage(img, 0, 0, firstImage.width, firstImage.height));
 
     canvas.toBlob(blob => {
-      console.log('blob', blob);
       const url = URL.createObjectURL(blob);
       resolve(url);
     });
