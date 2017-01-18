@@ -4,7 +4,8 @@
   "private": true,
   "description": "Chrome extension that changes your favicon in dev environments",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "make-data-url": ". ./data-url.sh"
   },
   "keywords": [
     "favicon",
