@@ -1,19 +1,28 @@
 {
-  "name": "Dev Warnings",
+  "name": "Devicon",
   "version": "0.0.1",
   "manifest_version": 2,
   "description": "Warns when you are on a dev-version of a page. Intended for web developers.",
   "homepage_url": "https://matislepik.com/dev-warnings",
   "icons": {
     "16": "icons/icon16.png",
+    "19": "icons/icon19.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
   "default_locale": "en",
   "options_page": "src/options/index.html",
+  "background": {
+    "scripts": ["src/bg.js"]
+  },
   "page_action": {
-    "default_icon": "icons/icon19.png",
-    "default_title": "page action demo"
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "19": "icons/icon19.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_title": "Devicon"
   },
   "web_accessible_resources": [
     "assets/overlay.png"
@@ -24,7 +33,7 @@
         "<all_urls>"
       ],
       "js": [
-        "src/inject/inject.js"
+        "src/inject.js"
       ]
     }
   ]
