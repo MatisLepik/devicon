@@ -1,4 +1,5 @@
 import { DEFAULT_REGEX_STRING } from '../shared/options';
+import initErrors, { showError, hideErrors } from './errors';
 
 function render(state) {
   const hostnameRegex = document.querySelector('input[name="hostname-regex"]');
@@ -14,11 +15,20 @@ function loadOptions() {
   });
 }
 
+function validateRegex(str) {
+  new RegExp(str); // eslint-disable-line no-new, reason: easiest way to check if string is valid regex :P
+}
+
 function save(evt) {
   evt.preventDefault();
   const hostnameRegex = document.querySelector('input[name="hostname-regex"]');
 
-  if (!hostnameRegex) return;
+  try {
+    validateRegex(hostnameRegex.value);
+  } catch (err) {
+    showError(err.message || 'Invalid input');
+    return;
+  }
 
   const saveBtn = document.getElementById('js-save');
   saveBtn.classList.add('is-saved');
@@ -37,5 +47,7 @@ function reset() {
 }
 
 reset();
+initErrors();
 document.getElementById('js-options-form').addEventListener('submit', save);
+document.getElementById('js-options-form').addEventListener('input', hideErrors);
 document.getElementById('js-reset').addEventListener('click', reset);

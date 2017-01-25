@@ -1,0 +1,40 @@
+.errors {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #b71c1c;
+    color: white;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 300ms, visibility 300ms;
+
+    &.is-visible {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.close-errors {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    cursor: pointer;
+
+    &::after {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        line-height: 19px;
+        background-color: #424242;
+        border-radius: 50%;
+        transition: background-color 150ms;
+        content: '\00d7';
+        color: #ddd;
+    }
+
+    &:hover::after {
+        background-color: lighten(#424242, 5%);
+    }
+}
