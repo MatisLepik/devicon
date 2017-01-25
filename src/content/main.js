@@ -4,26 +4,38 @@ import { DEFAULT_REGEX_STRING } from '../shared/options';
 
 setIconIfNeeded();
 
-function setIconIfNeeded() {
-  if (isDevelopment()) {
-    chrome.runtime.sendMessage('showPageAction'); // Turn the extension icon colorful
-    const link = document.querySelector('link[rel~="icon"]'); // rel~="icon" checks for the word "icon" (to get around apple-touch-icon, but still include rel="shortcut icon")
-    const faviconUrl = link ? link.href : '/favicon.ico'; // If no links are found, we hope there is a favicon.ico in the root
+function loadOptions() {
+  return new Promise(resolve => {
+    chrome.storage.sync.get({
+      hostnameRegex: DEFAULT_REGEX_STRING,
+    }, resolve);
+  });
+}
 
-    Promise.all([getImg(faviconUrl), getImg(OVERLAY_URL)])
-      .then(combineImages)
-      .then(changeFavicon)
-      .catch(err => console.error(err));
-  }
+function setIconIfNeeded() {
+  loadOptions().then(opts => {
+    if (isDevelopment(opts.hostnameRegex)) {
+      chrome.runtime.sendMessage('showPageAction'); // Turn the extension icon colorful
+      const link = document.querySelector('link[rel~="icon"]'); // rel~="icon" checks for the word "icon" (to get around apple-touch-icon, but still include rel="shortcut icon")
+      const faviconUrl = link ? link.href : '/favicon.ico'; // If no links are found, we hope there is a favicon.ico in the root
+
+      Promise.all([getImg(faviconUrl), getImg(OVERLAY_URL)])
+        .then(combineImages)
+        .then(changeFavicon)
+        .catch(err => console.error(err));
+    }
+  });
 }
 
 /**
  * Returns true if the site is detected to be on a development domain.
  * @return {Boolean}
  */
-function isDevelopment() {
+function isDevelopment(hostnameRegex) {
+  if (hostnameRegex === '') return false; // This is so the user can easily set the field to empty if they want to disable the behaviour
+
   const hostname = window.location.hostname;
-  return new RegExp(DEFAULT_REGEX_STRING).test(hostname);
+  return new RegExp(hostnameRegex).test(hostname);
 }
 
 /**
