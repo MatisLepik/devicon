@@ -1,18 +1,19 @@
 // const OVERLAY_URL = require('./overlay-data');
 import OVERLAY_URL from './overlay-data';
-const DEFAULT_REGEX = /^localhost$|^127\.0\.0\.1$/g;
+const DEFAULT_REGEX = /^localhost$|^127\.0\.0\.1$|\.dev\/?$/;
 
 setIconIfNeeded();
 
 function setIconIfNeeded() {
   if (isDevelopment()) {
-    chrome.runtime.sendMessage('showPageAction');
-    const link = document.querySelector('link[rel*="icon"]');
-    const faviconUrl = link ? link.href : '/favicon.ico';
+    chrome.runtime.sendMessage('showPageAction'); // Turn the extension icon colorful
+    const link = document.querySelector('link[rel~="icon"]'); // rel~="icon" checks for the word "icon" (to get around apple-touch-icon, but still include rel="shortcut icon")
+    const faviconUrl = link ? link.href : '/favicon.ico'; // If no links are found, we hope there is a favicon.ico in the root
 
     Promise.all([getImg(faviconUrl), getImg(OVERLAY_URL)])
       .then(combineImages)
-      .then(changeFavicon);
+      .then(changeFavicon)
+      .catch(err => console.error(err));
   }
 }
 
@@ -22,24 +23,27 @@ function setIconIfNeeded() {
  */
 function isDevelopment() {
   const hostname = window.location.hostname;
-  return DEFAULT_REGEX.match(hostname);
+  return DEFAULT_REGEX.test(hostname);
 }
 
 /**
- * Changes the favicon in the DOM, by trying to find a link with rel="icon".
+ * Changes the favicon in the DOM, by trying to find links with rel="icon".
  * If it doesn't find one, it creates one.
  * @param  {string}
  */
 function changeFavicon(src) {
-  let link = document.querySelector('link[rel*="icon"]');
+  const links = document.querySelectorAll('link[rel~="icon"]');
 
-  if (!link) {
-    link = document.createElement('link');
+  if (links.length === 0) { // Create a link if there are none
+    const link = document.createElement('link');
     link.rel = 'icon';
+    link.href = src;
     document.head.appendChild(link);
+  } else { // Otherwise, replace the href on all links just in case (I don't know which one the browser might use)
+    links.forEach(link => {
+      link.href = src; // eslint-disable-line no-param-reassign
+    })
   }
-
-  link.href = src;
 }
 
 /**
