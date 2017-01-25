@@ -2,8 +2,9 @@
 
 ## Development
 
-`npm run dev` - Watches for changes and serves the options page for development. Styles/scripts should be changed in the `src` directory, they will be processed and sent to the `ext` directory automatically. Everything else (html/etc) can be manually put in the `ext` directory.
-`npm run build` - Creates minified versions of the assets for production.
+- `npm run dev` - Watches for changes and serves the options page for development. Styles/scripts should be changed in the `src` directory, they will be processed and sent to the `ext` directory automatically. Everything else (html/etc) can be manually put in the `ext` directory.
+
+- `npm run build` - Creates minified versions of the assets for production.
 
 ## Generating overlay
 
