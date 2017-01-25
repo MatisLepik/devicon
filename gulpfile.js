@@ -60,23 +60,13 @@ gulp.task('build-production', ['clean'], () => { // Production version deletes p
 });
 
 gulp.task('default', ['build'], () => { // Default builds immediately and then starts watching
-  gulp.start('serve');
+  gulp.start('watch');
 });
 
-gulp.task('serve', () => { // Watch for changes and browsersync
-
-  browserSync.init({
-    server: {
-      baseDir: `${publicPath}/options`
-    },
-    port: 8787,
-    notify: false
-  });
-
-  gulp.watch(paths.style.watch, ['styles']);
+gulp.task('watch', () => { // Watch for changes
   paths.scripts.forEach(script => gulp.watch(script.watch, ['scripts']));
+  gulp.watch(paths.style.watch, ['styles']);
   gulp.watch('src/shared/**/*.js', ['scripts']);
-
   gulp.watch([`${publicPath}/**/*`]).on('change', browserSync.reload);
 });
 
