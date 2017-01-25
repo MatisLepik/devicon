@@ -54,7 +54,7 @@ function changeFavicon(src) {
   } else { // Otherwise, replace the href on all links just in case (I don't know which one the browser might use)
     links.forEach(link => {
       link.href = src; // eslint-disable-line no-param-reassign
-    })
+    });
   }
 }
 
