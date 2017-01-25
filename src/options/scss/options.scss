@@ -1,3 +1,8 @@
 @import "node_modules/normalize.css/normalize";
 @import "config";
 @import "node_modules/@optimistdigital/core-scss/core";
+
+@import "general";
+@import "components/input-text";
+@import "components/options-form";
+@import "components/button";

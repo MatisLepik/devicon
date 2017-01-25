@@ -1,0 +1,23 @@
+.options-form {
+
+    .input-controls {
+        font-size: 0;
+
+        .btn {
+            font-size: 14px;
+            width: 47%;
+
+            + .btn {
+                margin-left: 6%;
+            }
+        }
+    }
+
+    .input-group {
+        margin-top: 15px;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+}

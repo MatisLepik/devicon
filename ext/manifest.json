@@ -13,7 +13,7 @@
   "default_locale": "en",
   "options_ui": {
     "page": "options/index.html",
-    "chrome_style": true
+    "chrome_style": false
   },
   "background": {
     "scripts": ["build/bg.js"]

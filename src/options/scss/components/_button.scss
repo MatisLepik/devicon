@@ -1,0 +1,22 @@
+.btn {
+    padding: 10px 13px;
+    border-radius: 4px;
+    background-color: $brand-color;
+    color: white;
+    min-width: 120px;
+    transition: background-color 150ms;
+    text-transform: uppercase;
+    font-weight: 500;
+
+    &:hover {
+        background-color: darken($brand-color, 5%);
+    }
+
+    &.btn-gray {
+        background-color: #424242;
+
+        &:hover {
+            background-color: darken(#424242, 5%);
+        }
+    }
+}
