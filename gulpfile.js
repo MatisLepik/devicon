@@ -75,6 +75,7 @@ gulp.task('serve', () => { // Watch for changes and browsersync
 
   gulp.watch(paths.style.watch, ['styles']);
   paths.scripts.forEach(script => gulp.watch(script.watch, ['scripts']));
+  gulp.watch('src/shared/**/*.js', ['scripts']);
 
   gulp.watch([`${publicPath}/**/*`]).on('change', browserSync.reload);
 });
