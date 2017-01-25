@@ -14,8 +14,22 @@ function loadOptions() {
   });
 }
 
-function save() {
-  console.log('save');
+function save(evt) {
+  evt.preventDefault();
+  const hostnameRegex = document.querySelector('input[name="hostname-regex"]');
+
+  if (!hostnameRegex) return;
+
+  const saveBtn = document.getElementById('js-save');
+  saveBtn.classList.add('is-saved');
+
+  chrome.storage.sync.set({
+    hostnameRegex: hostnameRegex.value,
+  }, () => {
+    setTimeout(() => {
+      saveBtn.classList.remove('is-saved');
+    }, 1500);
+  });
 }
 
 function reset() {
@@ -23,5 +37,5 @@ function reset() {
 }
 
 reset();
-// document.getElementById('js-save').addEventListener('click', save);
+document.getElementById('js-options-form').addEventListener('submit', save);
 document.getElementById('js-reset').addEventListener('click', reset);

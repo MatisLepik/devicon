@@ -12,14 +12,17 @@
 <body>
 
 	<main class="options maxwidth-wrapper">
-		<form class="options-form" action="">
+		<form id="js-options-form" class="options-form" action="">
 			<label class="input-group">
 				<div class="input-title">Hostname regex</div>
 				<input class="input-text input-code" type="text" name="hostname-regex">
 			</label>
 
 			<div class="input-group input-controls">
-				<button class="btn">Save</button>
+				<button id="js-save" class="btn dynamic-btn">
+					<span class="default">Save</span>
+					<span class="dynamic-text is-saved">Saved!</span>
+				</button>
 				<button type="button" id="js-reset" class="btn btn-gray">Reset</button>
 			</div>
 		</form>
