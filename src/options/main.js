@@ -30,23 +30,27 @@ function save(evt) {
     return;
   }
 
-  const saveBtn = document.getElementById('js-save');
-  saveBtn.classList.add('is-saved');
-
   chrome.storage.sync.set({
     hostnameRegex: hostnameRegex.value,
-  }, () => {
-    setTimeout(() => {
-      saveBtn.classList.remove('is-saved');
-    }, 1500);
-  });
+  }, () => showSavedAnim('js-save'));
+}
+
+function showSavedAnim(target) {
+  const saveBtn = document.getElementById(target);
+  saveBtn.classList.add('is-saved');
+  setTimeout(() => saveBtn.classList.remove('is-saved'), 1500);
 }
 
 function reset() {
-  loadOptions().then(render);
+  chrome.storage.sync.set({
+    hostnameRegex: DEFAULT_REGEX_STRING,
+  }, () => {
+    loadOptions().then(render);
+    showSavedAnim('js-reset');
+  });
 }
 
-reset();
+loadOptions().then(render);
 initErrors();
 document.getElementById('js-options-form').addEventListener('submit', save);
 document.getElementById('js-options-form').addEventListener('input', hideErrors);
