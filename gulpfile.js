@@ -16,22 +16,28 @@ const gutil = require('gulp-util');
 const publicPath = 'ext';
 const paths = {
   style: {
-    src: 'src/scss/style.scss',
-    watch: 'src/scss/**/*.scss',
-    dest: `${publicPath}/options`
+    src: 'src/options/scss/options.scss',
+    watch: 'src/options/scss/**/*.scss',
+    dest: `${publicPath}/options/build`
   },
   scripts: [
     {
-      src: 'src/scripts/content.js',
+      src: 'src/content/main.js',
       outputName: 'content.js',
-      watch: 'src/scripts/**/*.js',
-      dest: `${publicPath}/js`
+      watch: 'src/content/**/*.js',
+      dest: `${publicPath}/build`
     },
     {
-      src: 'src/optionsScripts/options.js',
+      src: 'src/bg/main.js',
+      outputName: 'bg.js',
+      watch: 'src/bg/**/*.js',
+      dest: `${publicPath}/build`
+    },
+    {
+      src: 'src/options/main.js',
       outputName: 'options.js',
-      watch: 'src/optionsScripts/**/*.js',
-      dest: `${publicPath}/options`
+      watch: 'src/options/**/*.js',
+      dest: `${publicPath}/options/build`
     }
   ]
 };
@@ -121,7 +127,7 @@ gulp.task('scripts-production', () => {
         gutil.log(err);
         this.emit('end');
       })
-      .pipe(source('main.js'))
+      .pipe(source(script.outputName))
       .pipe(buffer())
       .pipe(uglify())
       .pipe(gulp.dest(script.dest));

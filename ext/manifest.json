@@ -11,9 +11,12 @@
     "128": "icons/icon128.png"
   },
   "default_locale": "en",
-  "options_page": "options/index.html",
+  "options_ui": {
+    "page": "options/index.html",
+    "chrome_style": true
+  },
   "background": {
-    "scripts": ["js/bg.js"]
+    "scripts": ["build/bg.js"]
   },
   "page_action": {
     "default_icon": {
@@ -33,7 +36,7 @@
         "<all_urls>"
       ],
       "js": [
-        "js/content.js"
+        "build/content.js"
       ]
     }
   ]

@@ -1,4 +1,7 @@
-const OVERLAY_URL = require('./overlay-data');
+// const OVERLAY_URL = require('./overlay-data');
+import OVERLAY_URL from './overlay-data';
+const DEFAULT_REGEX = /^localhost$|^127\.0\.0\.1$/g;
+
 setIconIfNeeded();
 
 function setIconIfNeeded() {
@@ -19,9 +22,7 @@ function setIconIfNeeded() {
  */
 function isDevelopment() {
   const hostname = window.location.hostname;
-  return hostname === 'localhost'
-    || hostname === '127.0.0.1'
-    || hostname.substr(hostname.length - 4) === '.dev';
+  return DEFAULT_REGEX.match(hostname);
 }
 
 /**
