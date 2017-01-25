@@ -1,16 +1,17 @@
-const gulp = require('gulp');
-const sass = require('gulp-sass');
-const stripCssComments = require('gulp-strip-css-comments');
 const autoprefixer = require('gulp-autoprefixer');
-const cleanCSS = require('gulp-clean-css');
-const uglify = require('gulp-uglify');
-const browserSync = require('browser-sync');
-const sourcemaps = require('gulp-sourcemaps');
-const browserify = require('browserify');
 const babelify = require('babelify');
-const source = require('vinyl-source-stream');
+const browserify = require('browserify');
+const browserSync = require('browser-sync');
 const buffer = require('vinyl-buffer');
+const cleanCSS = require('gulp-clean-css');
+const del = require('del');
+const gulp = require('gulp');
 const gutil = require('gulp-util');
+const sass = require('gulp-sass');
+const source = require('vinyl-source-stream');
+const sourcemaps = require('gulp-sourcemaps');
+const stripCssComments = require('gulp-strip-css-comments');
+const uglify = require('gulp-uglify');
 
 /* Config */
 const publicPath = 'ext';
@@ -52,8 +53,10 @@ gulp.task('build', () => { // Basic build development version
   gulp.start('styles', 'scripts');
 });
 
-gulp.task('build-production', ['styles-production', 'scripts-production'], () => { // Production version deletes previous stuff, minifies, strips comments
+gulp.task('build-production', ['clean'], () => { // Production version deletes previous stuff, minifies, strips comments
   process.env.NODE_ENV = 'production';
+  gulp.start('styles-production');
+  gulp.start('scripts-production');
 });
 
 gulp.task('default', ['build'], () => { // Default builds immediately and then starts watching
@@ -142,3 +145,8 @@ gulp.task('styles-production', () => gulp.src(paths.style.src)
     .pipe(autoprefixer('last 3 versions'))
     .pipe(cleanCSS())
     .pipe(gulp.dest(paths.style.dest)));
+
+gulp.task('clean', () => del([
+  `${publicPath}/build/**/*`,
+  `${publicPath}/options/build/**/*`
+]));
