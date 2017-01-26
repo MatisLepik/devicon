@@ -44,18 +44,17 @@ function isDevelopment(hostnameRegex) {
  * @param  {string}
  */
 function changeFavicon(src) {
-  const links = document.querySelectorAll('link[rel~="icon"]');
-
-  if (links.length === 0) { // Create a link if there are none
+  const links = Array.from(document.querySelectorAll('link[rel~="icon"]'));
+  if (links.length === 0) { // If there are no icon links, create one
     const link = document.createElement('link');
     link.rel = 'icon';
-    link.href = src;
     document.head.appendChild(link);
-  } else { // Otherwise, replace the href on all links just in case (I don't know which one the browser might use)
-    links.forEach(link => {
-      link.href = src; // eslint-disable-line no-param-reassign
-    });
+    links.push(link);
   }
+
+  links.forEach(link => {
+    link.href = src; // eslint-disable-line no-param-reassign
+  });
 }
 
 /**
@@ -82,8 +81,7 @@ function combineImages(_images) {
   if (images.length === 0) return Promise.reject('Not enough images');
 
   return new Promise((resolve) => {
-    // const canvas = document.querySelector('#favicon');
-    const canvas = document.createElement('canvas'); // TODO
+    const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     const firstImage = images[0];
     canvas.width = firstImage.width;

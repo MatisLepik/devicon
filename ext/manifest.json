@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "manifest_version": 2,
   "description": "Warns when you are on a dev-version of a page. Intended for web developers.",
-  "homepage_url": "https://matislepik.com/devicon",
+  "homepage_url": "http://matislepik.com/devicon",
   "icons": {
     "16": "icons/icon16.png",
     "19": "icons/icon19.png",
