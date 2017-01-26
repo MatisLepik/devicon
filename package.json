@@ -1,6 +1,6 @@
 {
   "name": "devicon",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "description": "Chrome extension that changes your favicon in dev environments",
   "scripts": {
