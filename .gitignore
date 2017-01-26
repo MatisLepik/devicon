@@ -3,3 +3,5 @@ node_modules/
 npm-debug.log
 ext/build/
 ext/options/build/
+ext.crx
+ext.pem
