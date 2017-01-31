@@ -1,5 +1,3 @@
-// const OVERLAY_URL = require('./overlay-data');
-import OVERLAY_URL from './overlay-data';
 import { DEFAULT_REGEX_STRING } from '../shared/options';
 
 setIconIfNeeded();
@@ -19,8 +17,8 @@ function setIconIfNeeded() {
       const link = document.querySelector('link[rel~="icon"]'); // rel~="icon" checks for the word "icon" (to get around apple-touch-icon, but still include rel="shortcut icon")
       const faviconUrl = link ? link.href : '/favicon.ico'; // If no links are found, we hope there is a favicon.ico in the root
 
-      Promise.all([getImg(faviconUrl), getImg(OVERLAY_URL)])
-        .then(combineImages)
+      getImg(faviconUrl)
+        .then(addOverlay)
         .then(changeFavicon)
         .catch(err => console.error(err));
     }
@@ -76,18 +74,26 @@ function getImg(src) {
  * @param  {Array<Image>} images
  * @return {Promise<string>}
  */
-function combineImages(_images) {
-  const images = _images.filter(img => img);
-  if (images.length === 0) return Promise.reject('Not enough images');
-
+function addOverlay(img) {
+  console.log('addOverlay', img);
   return new Promise((resolve) => {
+    // Create canvas and size it according to the original favicon
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
-    const firstImage = images[0];
-    canvas.width = firstImage.width;
-    canvas.height = firstImage.height;
+    canvas.width = img ? img.width : 16; // If there is no existing favicon, make it 16x16
+    canvas.height = img ? img.height : 16;
 
-    images.forEach(img => img && ctx.drawImage(img, 0, 0, firstImage.width, firstImage.height));
+    // Draw the favicon
+    img && ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
+    // Dark overlay over the whole canvas
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // Border around canvas
+    ctx.strokeStyle = 'rgba(244, 67, 54, 0.9)';
+    ctx.lineWidth = Math.floor(canvas.width * 4 / 16); // 2px border at 16x16. We need to scale this because the original canvas might be bigger and we dont wanna lose quality
+
+    ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
     canvas.toBlob(blob => {
       const url = URL.createObjectURL(blob);
