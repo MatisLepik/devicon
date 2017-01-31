@@ -1,11 +1,11 @@
-import { DEFAULT_REGEX_STRING } from '../shared/options';
+import { defaults } from '../shared/options';
 
 setIconIfNeeded();
 
 function loadOptions() {
   return new Promise(resolve => {
     chrome.storage.sync.get({
-      hostnameRegex: DEFAULT_REGEX_STRING,
+      hostnameRegex: defaults.hostnameRegex,
     }, resolve);
   });
 }
@@ -90,7 +90,7 @@ function addOverlay(img) {
     // Dark overlay over the whole canvas
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     // Border around canvas
-    ctx.strokeStyle = 'rgba(244, 67, 54, 0.9)';
+    ctx.strokeStyle = '#ef4f44';
     ctx.lineWidth = Math.floor(canvas.width * 4 / 16); // 2px border at 16x16. We need to scale this because the original canvas might be bigger and we dont wanna lose quality
 
     ctx.strokeRect(0, 0, canvas.width, canvas.height);

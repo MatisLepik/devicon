@@ -1,0 +1,12 @@
+.input-color {
+    width: 100%;
+    padding: 0;
+    height: 40px;
+    transform: scaleY(1.23) scaleX(1.02); // Color inputs don't like to render at their full height, not sure if there's a way to reset that builtin style
+    cursor: pointer;
+}
+
+.input-color-wrapper {
+    border-radius: 4px;
+    overflow: hidden;
+}

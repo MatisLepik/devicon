@@ -1,15 +1,17 @@
 .options-form {
 
+    &:not(.is-touched) .btn-save {
+        pointer-events: none;
+        opacity: 0.7;
+        cursor: default;
+    }
+
     .input-controls {
-        font-size: 0;
+        margin-top: 35px;
 
         .btn {
             font-size: 14px;
-            width: 47%;
-
-            + .btn {
-                margin-left: 6%;
-            }
+            width: 48%;
         }
     }
 
@@ -19,9 +21,22 @@
 
     .input-group {
         margin-top: 25px;
+        display: block;
+        font-size: 16px;
 
         &:first-child {
             margin-top: 0;
+        }
+    }
+
+    .double-input {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .input-group {
+            width: 48%;
+            margin-top: 25px;
         }
     }
 }

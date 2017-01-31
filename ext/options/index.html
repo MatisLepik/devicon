@@ -15,11 +15,25 @@
 		<form id="js-options-form" class="options-form" action="">
 			<label class="input-group">
 				<div class="input-title">Hostname regex</div>
-				<input class="input-text input-code" type="text" name="hostname-regex">
+				<input class="input-text input-code" type="text" name="hostnameRegex">
 			</label>
 
-			<div class="input-group input-controls">
-				<button id="js-save" class="btn dynamic-btn">
+			<div class="double-input">
+				<label class="input-group">
+					<div class="input-title">Border width</div>
+					<input class="input-text" type="number" name="borderWidth">
+				</label>
+
+				<label class="input-group">
+					<div class="input-title">Border color</div>
+					<div class="input-color-wrapper">
+						<input class="input-color" type="color" name="borderColor">
+					</div>
+				</label>
+			</div>
+
+			<div class="double-input input-controls">
+				<button id="js-save" class="btn dynamic-btn btn-save">
 					<span class="default">Save</span>
 					<span class="dynamic-text is-saved">Saved!</span>
 				</button>

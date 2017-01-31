@@ -3,8 +3,7 @@
     border-radius: 4px;
     background-color: $brand-color;
     color: white;
-    min-width: 120px;
-    transition: background-color 150ms;
+    transition: background-color 150ms, opacity 150ms;
     text-transform: uppercase;
     font-weight: 500;
 

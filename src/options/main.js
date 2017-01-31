@@ -1,17 +1,16 @@
-import { DEFAULT_REGEX_STRING } from '../shared/options';
+import { defaults } from '../shared/options';
 import initErrors, { showError, hideErrors } from './errors';
 
 function render(state) {
-  const hostnameRegex = document.querySelector('input[name="hostname-regex"]');
-
-  if (hostnameRegex) hostnameRegex.value = state.hostnameRegex;
+  Object.keys(state).forEach(key => {
+    const input = document.querySelector(`input[name="${key}"]`);
+    if (input) input.value = state[key];
+  });
 }
 
 function loadOptions() {
   return new Promise(resolve => {
-    chrome.storage.sync.get({
-      hostnameRegex: DEFAULT_REGEX_STRING,
-    }, resolve);
+    chrome.storage.sync.get(defaults, resolve);
   });
 }
 
@@ -21,7 +20,7 @@ function validateRegex(str) {
 
 function save(evt) {
   evt.preventDefault();
-  const hostnameRegex = document.querySelector('input[name="hostname-regex"]');
+  const hostnameRegex = document.querySelector('input[name="hostnameRegex"]');
 
   try {
     validateRegex(hostnameRegex.value);
@@ -30,9 +29,15 @@ function save(evt) {
     return;
   }
 
-  chrome.storage.sync.set({
-    hostnameRegex: hostnameRegex.value,
-  }, () => showSavedAnim('js-save'));
+  document.getElementById('js-options-form').classList.remove('is-touched');
+
+  const optionMap = {};
+  Object.keys(defaults).forEach(key => {
+    optionMap[key] = document.querySelector(`input[name="${key}"]`).value;
+  });
+
+  // Loop through all the options and set their values
+  chrome.storage.sync.set(optionMap, () => showSavedAnim('js-save'));
 }
 
 function showSavedAnim(target) {
@@ -42,16 +47,17 @@ function showSavedAnim(target) {
 }
 
 function reset() {
-  chrome.storage.sync.set({
-    hostnameRegex: DEFAULT_REGEX_STRING,
-  }, () => {
-    loadOptions().then(render);
-    showSavedAnim('js-reset');
-  });
+  document.getElementById('js-options-form').classList.add('is-touched');
+  render(defaults);
+}
+
+function onInput() {
+  hideErrors();
+  document.getElementById('js-options-form').classList.add('is-touched');
 }
 
 loadOptions().then(render);
 initErrors();
 document.getElementById('js-options-form').addEventListener('submit', save);
-document.getElementById('js-options-form').addEventListener('input', hideErrors);
+document.getElementById('js-options-form').addEventListener('input', onInput);
 document.getElementById('js-reset').addEventListener('click', reset);
