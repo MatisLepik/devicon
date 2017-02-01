@@ -73,7 +73,6 @@ function getImg(src) {
  * @return {Promise<string>}
  */
 function addOverlay(img, opts) {
-  console.log('addOverlay', img);
   return new Promise((resolve) => {
     // Create canvas and size it according to the original favicon
     const canvas = document.createElement('canvas');
