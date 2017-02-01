@@ -18,7 +18,9 @@ function setIconIfNeeded() {
       getImg(faviconUrl)
         .then(img => addOverlay(img, opts))
         .then(changeFavicon)
-        .catch(err => console.error(err));
+        .catch(err => { // eslint-disable-line no-unused-vars
+          // console.error(err) // No need to be loud for production :P
+        });
     }
   });
 }
@@ -73,7 +75,7 @@ function getImg(src) {
  * @return {Promise<string>}
  */
 function addOverlay(img, opts) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     // Create canvas and size it according to the original favicon
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
@@ -92,9 +94,13 @@ function addOverlay(img, opts) {
 
     ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-    canvas.toBlob(blob => {
-      const url = URL.createObjectURL(blob);
-      resolve(url);
-    });
+    try {
+      canvas.toBlob(blob => {
+        const url = URL.createObjectURL(blob);
+        resolve(url);
+      });
+    } catch (err) {
+      reject(err);
+    }
   });
 }
