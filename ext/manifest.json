@@ -1,6 +1,6 @@
 {
   "name": "Devicon",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "manifest_version": 2,
   "description": "Shows when you are on a dev-version of a page by putting a border around the favicon.",
   "homepage_url": "http://matislepik.com/devicon",
