@@ -1,5 +1,7 @@
 # Devicon
 
+[Download on Chrome Web Store](https://chrome.google.com/webstore/detail/devicon/giibkebjejbhlblmanjkmkmdkahmabge)
+
 ### Overlay your favicon in development environments
 
 This is a Chrome extension for web developers. It looks at the URL of the page you're on to see if it's a dev environment and adds a border to the favicon so you can easily tell if you're on a dev environment or not.
