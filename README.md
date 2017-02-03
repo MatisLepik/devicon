@@ -18,4 +18,4 @@ Note: If your site changes its favicon dynamically (such as with react-helmet), 
 
 - `npm run dev` - Watches for changes to scripts/styles under the `src` directory, and puts processed versions into the `build` directories under `ext`. Everything else (html/etc) can be changed manually in the `ext` directory.
 
-- `npm run build` - Creates minified versions of the assets for production.
+- `npm run build` - Minifies assets and creates .zip file of the extension for the Chrome Web Store

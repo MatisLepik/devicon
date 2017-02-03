@@ -4,7 +4,7 @@
   "private": true,
   "description": "Chrome extension that changes your favicon in dev environments",
   "scripts": {
-    "build": "gulp build-production",
+    "build": "gulp build-production && zip -r ext.zip ext && node ./rename-zip.js",
     "dev": "gulp",
     "make-data-url": ". ./data-url.sh"
   },
