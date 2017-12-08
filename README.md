@@ -10,11 +10,13 @@ You can change in the options what URL hostname constitutes a dev environment, b
 
 - `localhost`
 - `127.0.0.1`
-- Sites ending with `.dev`
+- Sites ending with `.dev` / `.test`
 
 Note: If your site changes its favicon dynamically (such as with react-helmet), the overlay will be lost.
 
 ## Development
+
+- `npm install` - Install node modules
 
 - `npm run dev` - Watches for changes to scripts/styles under the `src` directory, and puts processed versions into the `build` directories under `ext`. Everything else (html/etc) can be changed manually in the `ext` directory.
 
