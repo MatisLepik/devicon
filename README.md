@@ -10,7 +10,7 @@ You can change in the options what URL hostname constitutes a dev environment, b
 
 - `localhost`
 - `127.0.0.1`
-- Sites ending with `.dev` / `.test`
+- Sites ending with `.test`
 
 Note: If your site changes its favicon dynamically (such as with react-helmet), the overlay will be lost.
 
